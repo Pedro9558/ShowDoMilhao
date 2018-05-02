@@ -31,15 +31,22 @@ namespace SDMClasses
         public ScoreManager(Player P, string FileName)
         {
             this.Jogador = P;
-            this._filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            // Combinando o caminho do roaming com uma pasta SDM, ficaria assim: C:/Users/(Nome do usuário)/%appdata%/roaming/SDM
-            string aux = Path.Combine(FilePath, "SDM");
-            // Se o diretório acima não existir, crie um novo
-            if (!Directory.Exists(aux))
-                Directory.CreateDirectory(aux);
-            // Prepara o arquivo: C:/Users/(Nome do usuário)/%appdata%/roaming/SDM/(Nome do arquivo).ssdm para ser lido ou criado"
-            this._filePath = aux + "/"+ FileName + ".ssdm";
-            this.CreateScoreFile();
+            if (FileName != null)
+            {
+                this._filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                // Combinando o caminho do roaming com uma pasta SDM, ficaria assim: C:/Users/(Nome do usuário)/%appdata%/roaming/SDM
+                string aux = Path.Combine(FilePath, "SDM");
+                // Se o diretório acima não existir, crie um novo
+                if (!Directory.Exists(aux))
+                    Directory.CreateDirectory(aux);
+                // Prepara o arquivo: C:/Users/(Nome do usuário)/%appdata%/roaming/SDM/(Nome do arquivo).ssdm para ser lido ou criado"
+                this._filePath = aux + "/" + FileName + ".ssdm";
+                this.CreateScoreFile();
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
         /// <summary>
         /// Cria o arquivo de placares inicial caso o mesmo não exista
@@ -110,9 +117,18 @@ namespace SDMClasses
             // Lê todos os registros do placar ordenado e adiciona a string
             foreach (KeyValuePair<string, string> dict in OrdenarPlacar(Linhas))
             {
-                PlacarOrdenado.Append(dict.Key).Append(" = ").Append(dict.Value).Append("\n");
+                PlacarOrdenado.Append(RemoveNumeros(dict.Key)).Append(" = ").Append(dict.Value).Append("\n");
             }
             return PlacarOrdenado.ToString();
+        }
+        /// <summary>
+        /// Remove os números bugados do placar
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <returns></returns>
+        public string RemoveNumeros(string Text)
+        {
+            return Text.Replace("0", "").Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "").Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace(".", ""); ;
         }
         /// <summary>
         /// Retorna um dicionario ordenado do placar, em ordem decrescente
@@ -137,7 +153,7 @@ namespace SDMClasses
             // Converte o dicionario em uma lista
             var List = dictionary.ToList();
             // Aranja a lista para ficar em ordem decrescente
-            List.Sort((value1, value2) => value1.Value.CompareTo(value2.Value));
+            List.Sort((value1, value2) => value2.Value.CompareTo(value1.Value));
             // Converte de volta em um dicionario
             dictionary = List.ToDictionary(pair => pair.Key, pair => pair.Value);
             return dictionary;
