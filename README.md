@@ -2,7 +2,7 @@
 Um minigame tipo questionário com 10 perguntas, simulando o Show do Milhão
 
 ## Como Instalar
-   1. Baixe o master clicando no botão "Clone ou Download"
+   1. Baixe o jogo aqui: (Link em breve)
    2. Seleciona a opção "Download as ZIP"
    3. Extraia os arquivos
    4. Procure pelo arquivo "ShowDoMilhao.exe"
@@ -20,12 +20,9 @@ Um minigame tipo questionário com 10 perguntas, simulando o Show do Milhão
 
 ## Atualizações
 	1. Adições
-	   - Adicionado placar ordenado por ordem decrescente
-	   - Adicionado mais perguntas
-	   - Adicionado novo esquema de placares
-	     - Agora, ao invés de 1000 pontos toda a hora, quanto mais você acertar, mais pontos ganhará.
-	   - Adicionado mais frases do Silvio Santos
+	   - Adicionado mais peguntas
+	   - Adicionado testes unitários feitos
 	   
 	2. Correção de Bugs
-	   - Corrigido alguns bugs de Layout
-	   - Corrigido algumas respostas incorretas
+	   - Corrigido alguns bugs do placar
+	   - Corrigido mais bugs do layout
