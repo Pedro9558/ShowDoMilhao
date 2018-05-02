@@ -25,7 +25,7 @@ namespace ShowDoMilhao
     public partial class MainWindow : Window
     {
         // Vetor de perguntas
-        private Pergunta[] _perguntas = new Pergunta[75];
+        private Pergunta[] _perguntas = new Pergunta[85];
         // Vetor com as perguntas selecionadas
         private Pergunta[] _perguntasSelecionadas = new Pergunta[10];
         private Random R = new Random();
@@ -45,6 +45,8 @@ namespace ShowDoMilhao
         // Variavel Auxiliar para a animações
         private int _auxForAnimation;
 
+        // Criador do jogo
+        private string _criador;
         private bool _canPressAnyKey;
         // Guarda a alternativa a escolha
         private byte _alternativaEscolhida;
@@ -58,6 +60,10 @@ namespace ShowDoMilhao
         {
             get { return this._threadDelay; }
             set { this._threadDelay = value; }
+        }
+        public string Criador
+        {
+            get { return "Pedro9558"; }
         }
         public int AuxForAnimation
         {
@@ -635,6 +641,16 @@ namespace ShowDoMilhao
             Perguntas[72] = new Pergunta("Qual é o alimento preferido do Garfield?", new string[] { "Macarronada", "Lasanha", "Rosbife", "Ração de Cachorro" }, 1);
             Perguntas[73] = new Pergunta("Em que ano começou, e em que ano terminou a guerra fria?", new string[] { "1947-1992", "1945-1992", "1945-1991", "1954-1992" }, 0);
             Perguntas[74] = new Pergunta("Qual foi a primeira civilização a habitar a Mesopotâmia?", new string[] { "Caldeus", "Babilôncos", "Sumérios", "Hititas" }, 2);
+            Perguntas[75] = new Pergunta("Quem realmente descobriu o Brasil?", new string[] { "Duarte Pacheco Pereira", "Pedro Álvares Cabral", "D. Pedro II", "D. João IV" }, 0);
+            Perguntas[76] = new Pergunta("Qual o nome do brasileiro conhecido como \"Pai da Aviação\"?", new string[] { "José de Alencar", "Santos Dumont", "Osvaldo Cruz", "Castro Alves" }, 1);
+            Perguntas[77] = new Pergunta("Qual foi a revolução que alavancou a independência do Brasil?", new string[] { "Revolução Farroupilha", "Revolução Praieira", "Revolução Federalista", "Revolução Pernambucana" }, 3);
+            Perguntas[78] = new Pergunta("O que é o Brexit?", new string[] { "Saída da Inglaterra do Reino Unido", "Saída do Reino Unido da União Europeia", "Fim da monarquia no Reino Unido", "Saída do Reino Unido da Zona Euro" }, 1);
+            Perguntas[79] = new Pergunta("O acordo internacional de Paris, é um acordo que trata...", new string[] { "da restrição de imigrantes em Paris", "da proteção da França dos atentados terroristas", "do aquecimento global", "do Desenvolvimento Sustentável" }, 2);
+            Perguntas[80] = new Pergunta("Por quanto tempo durou a Guerra dos 100 anos?", new string[] { "98 anos", "100 anos", "106 anos", "116 anos" }, 3);
+            Perguntas[81] = new Pergunta("Como é chamado o nome das pinturas das cavernas?", new string[] { "Rupestre", "Moderna", "Geométrica", "Paleolitica" }, 0);
+            Perguntas[82] = new Pergunta("Com quantos anos de casado se comemora a tradicional \"Bodas de Ouro\"?", new string[] { "25 anos", "50 anos", "75 anos", "100 anos" }, 1);
+            Perguntas[83] = new Pergunta("Quantos elementos químicos a tabela periódica possui?", new string[] { "108", "109", "113", "118" }, 3);
+            Perguntas[84] = new Pergunta("Quais os países que têm a maior e a menor expectativa de vida do mundo?", new string[] { "Austrália e Afeganistão", "Estados Unidos e Angola", "Japão e Serra Leoa", "Itália e Chade" }, 2);
         }
         /// <summary>
         /// Seleciona 10 perguntas aleatórias a serem usadas na rodada
