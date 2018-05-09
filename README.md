@@ -2,11 +2,10 @@
 Um minigame tipo questionário com 10 perguntas, simulando o Show do Milhão
 
 ## Como Instalar
-   1. Baixe o jogo aqui: (Link em breve)
-   2. Seleciona a opção "Download as ZIP"
-   3. Extraia os arquivos
-   4. Procure pelo arquivo "ShowDoMilhao.exe"
-   5. Clique duas vezes sobre ele para iniciar
+   1. Baixe o jogo aqui: http://www.mediafire.com/file/xr43l7uz25xe1pd/Show%20Do%20Milh%E3o.rar
+   2. Extraia os arquivos
+   3. Execute o arquivo **ShowDoMilhao.exe**
+   4. Siga os passos de **Como Jogar** para aprender a joga-lo
    
 ## Como Jogar
    1. Aguarde a tela de abertura
@@ -14,15 +13,17 @@ Um minigame tipo questionário com 10 perguntas, simulando o Show do Milhão
    3. No menu inicial clique no botão "Iniciar"
    4. Você responderá a 10 perguntas de múltipla escolha aleatórias
    5. Com o mouse seleciona a resposta que você acha que é.
-   6. Uma mensagem aparecerá pedindo a confirmação de sua resposta, cabe a você decidir se fica com sua resposta ou muda.
+   6. Uma mensagem aparecerá pedindo a confirmação de sua resposta, cabe a você decidir se fica com sua resposta ou não.
    7. Responda todas as 10 questões para ganhar o jogo!
    8. Bom jogo! ;-)
 
 ## Atualizações
 	1. Adições
 	   - Adicionado mais peguntas
-	   - Adicionado testes unitários feitos
-	   
-	2. Correção de Bugs
-	   - Corrigido alguns bugs do placar
-	   - Corrigido mais bugs do layout
+	   - Adicionado suporte para adicionar perguntas com imagens
+	   - Adicionado mais testes unitários
+	   - Adicionado vídeo de introdução do jogo
+	   - Tamanho da tela principal aumentada
+	
+	2. Remoções
+	   - Removido variavies desnecessarias
