@@ -133,11 +133,71 @@ namespace ShowDoMilhao.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sdm_exercicio1 {
+            get {
+                object obj = ResourceManager.GetObject("sdm_exercicio1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sdm_exercicio2 {
+            get {
+                object obj = ResourceManager.GetObject("sdm_exercicio2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sdm_exercicio3 {
+            get {
+                object obj = ResourceManager.GetObject("sdm_exercicio3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sdm_exercicio4 {
+            get {
+                object obj = ResourceManager.GetObject("sdm_exercicio4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sdm_exercicio5 {
+            get {
+                object obj = ResourceManager.GetObject("sdm_exercicio5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream sdm_intro {
             get {
                 return ResourceManager.GetStream("sdm_intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] sdm_introsdm {
+            get {
+                object obj = ResourceManager.GetObject("sdm_introsdm", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
