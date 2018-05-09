@@ -181,6 +181,16 @@
   <ItemGroup>
     <Resource Include="favicon %283%29.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sdm_exercicio1.png" />
+    <Resource Include="Resources\sdm_exercicio2.png" />
+    <Resource Include="Resources\sdm_exercicio3.png" />
+    <Resource Include="Resources\sdm_exercicio4.png" />
+    <Resource Include="Resources\sdm_exercicio5.png" />
+    <Content Include="Resources\sdm_introsdm.wmv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
