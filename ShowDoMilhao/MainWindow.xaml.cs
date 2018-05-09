@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using SDMClasses;
 
@@ -25,11 +16,11 @@ namespace ShowDoMilhao
     public partial class MainWindow : Window
     {
         // Vetor de perguntas
-        private Pergunta[] _perguntas = new Pergunta[85];
+        private Pergunta[] _perguntas = new Pergunta[90];
         // Vetor com as perguntas selecionadas
         private Pergunta[] _perguntasSelecionadas = new Pergunta[10];
         private Random R = new Random();
-        // Temporaziador para criação de ações de segundo plano
+        // Temporaziadores para criação de ações de segundo plano
         private Timer T = new Timer();
         private Timer TTwo = new Timer();
         private Timer TThree = new Timer();
@@ -47,6 +38,7 @@ namespace ShowDoMilhao
 
         // Criador do jogo
         private string _criador;
+        // Variavel reponsável pela ação "Aperte qualquer tecla continuar"
         private bool _canPressAnyKey;
         // Guarda a alternativa a escolha
         private byte _alternativaEscolhida;
@@ -157,13 +149,19 @@ namespace ShowDoMilhao
                     }
                     break;
                 case 2:
-                    // Reproduz audio do silvio santos
-                    Player.Play();
+                    // Reproduz vídeo intro
+                    introVideo.Visibility = Visibility.Visible;
+                    introVideo.Play();
+                    T.Interval = 41600;
                     AuxForAnimation++;
                     break;
                 case 3:
-                    // Espera
+                    // Termina Reprodução do vídeo
+                    introVideo.Visibility = Visibility.Hidden;
+                    introVideo.Stop();
                     AuxForAnimation++;
+                    Player.Play();
+                    T.Interval = 3000;
                     break;
                 case 4:
                     // Toca música inicial de fundo
@@ -219,16 +217,24 @@ namespace ShowDoMilhao
                     BIniciar.Visibility = Visibility.Visible;
                     BPlacar.Visibility = Visibility.Visible;
                     BSair.Visibility = Visibility.Visible;
+                    // Coleta lixo caso haja algum na memória
+                    GC.Collect();
                     SilvioImage.Visibility = Visibility.Visible;
                     // Cria o perfil do Jogador, caso não exista
                     if(Guest == null)
                     {
                         Guest = new Player(InputNome.Text);
+                        Titulo.Content = "Bem-vindo(a) " + Guest.Nome + "!";
                     }
-                    Titulo.Content = "Bem-vindo(a) "+Guest.Nome+"!";
-                    Titulo.Margin = new Thickness(116, 47, 0, 0);
-                    this.Width = 525.0;
-                    this.Height = 350.0;
+                    else
+                    {
+                        Titulo.Visibility = Visibility.Visible;
+                        Titulo.Content = "Mais uma, " + Guest.Nome + "?"; 
+                    }
+                    Titulo.Margin = new Thickness(152, 67, 0, 0);
+                    this.Width = 625.0;
+                    this.Height = 450.0;
+                    // Cria placar para o jogador caso não tenha sido criado
                     if (Placar == null)
                     {
                         Placar = new ScoreManager(Guest, "SDMPlacar");
@@ -257,16 +263,20 @@ namespace ShowDoMilhao
         /// <param name="e"></param>
         private void AnimacaoPergunta(object sender, EventArgs e)
         {
+            // A animação ocorre conforme a visibilidade do indicador do número da pergunta
             if(IndicadorPergunta.Visibility == Visibility.Hidden)
             {
+                // Esconde tudo da pergunta anterior
                 Pergunta.Visibility = Visibility.Hidden;
                 AlternativaA.Visibility = Visibility.Hidden;
                 AlternativaB.Visibility = Visibility.Hidden;
                 AlternativaC.Visibility = Visibility.Hidden;
                 AlternativaD.Visibility = Visibility.Hidden;
                 Pontos.Visibility = Visibility.Hidden;
+                ImagemPergunta.Visibility = Visibility.Hidden;
                 IndicadorPergunta.Content = "Pergunta " + NumeroDaPergunta;
                 IndicadorPergunta.Visibility = Visibility.Visible;
+                // Executa um audio personalizado dependendo do número da pergunta
                 switch(NumeroDaPergunta)
                 {
                     case 1:
@@ -315,6 +325,7 @@ namespace ShowDoMilhao
             }
             else
             {
+                // Constroi a pergunta e exibe-a para o jogador
                 Respondeu = false;
                 this.ConstroiPergunta();
                 IndicadorPergunta.Visibility = Visibility.Hidden;
@@ -355,7 +366,7 @@ namespace ShowDoMilhao
             AlternativaC.Background = new SolidColorBrush(Colors.Transparent);
             AlternativaD.Background = new SolidColorBrush(Colors.Transparent);
             Pontos.Content = "Placar: " + Guest.Pontuacao;
-            this.Width = 700.0;
+            this.Width = 750.0;
             // Dependendo de qual questão está, a tela mostra a questão conforme o número
             switch (NumeroDaPergunta)
             {
@@ -365,6 +376,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[0].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[0].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[0].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if(PerguntasSelecionadas[0].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[0].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 2:
                     Pergunta.Content = "2." + PerguntasSelecionadas[1].Questao;
@@ -372,6 +389,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[1].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[1].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[1].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[1].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[1].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 3:
                     Pergunta.Content = "3." + PerguntasSelecionadas[2].Questao;
@@ -379,6 +402,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[2].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[2].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[2].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[2].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[2].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 4:
                     Pergunta.Content = "4." + PerguntasSelecionadas[3].Questao;
@@ -386,6 +415,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[3].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[3].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[3].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[3].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[3].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 5:
                     Pergunta.Content = "5." + PerguntasSelecionadas[4].Questao;
@@ -393,6 +428,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[4].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[4].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[4].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[4].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[4].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 6:
                     Pergunta.Content = "6." + PerguntasSelecionadas[5].Questao;
@@ -400,6 +441,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[5].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[5].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[5].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[5].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[5].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 7:
                     Pergunta.Content = "7." + PerguntasSelecionadas[6].Questao;
@@ -407,6 +454,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[6].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[6].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[6].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[6].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[6].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 8:
                     Pergunta.Content = "8." + PerguntasSelecionadas[7].Questao;
@@ -414,6 +467,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[7].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[7].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[7].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[7].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[7].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 9:
                     Pergunta.Content = "9." + PerguntasSelecionadas[8].Questao;
@@ -421,6 +480,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[8].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[8].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[8].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[8].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[8].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
                 case 10:
                     Pergunta.Content = "10." + PerguntasSelecionadas[9].Questao;
@@ -428,6 +493,12 @@ namespace ShowDoMilhao
                     AlternativaB.Content = "B)" + PerguntasSelecionadas[9].Alternativas[1];
                     AlternativaC.Content = "C)" + PerguntasSelecionadas[9].Alternativas[2];
                     AlternativaD.Content = "D)" + PerguntasSelecionadas[9].Alternativas[3];
+                    // Testa se há uma imagem na questão
+                    if (PerguntasSelecionadas[9].LocalizacaoDaImagemDaPergunta != null)
+                    {
+                        ImagemPergunta.Visibility = Visibility.Visible;
+                        ImagemPergunta.Source = new BitmapImage(PerguntasSelecionadas[9].LocalizacaoDaImagemDaPergunta);
+                    }
                     break;
             }
         }
@@ -458,10 +529,6 @@ namespace ShowDoMilhao
                 }
                 Player.Stream = SilvioSantos;
                 Player.Play();
-                Console.WriteLine(PerguntasSelecionadas[NumeroDaPergunta - 1].Questao);
-                Console.WriteLine(PerguntasSelecionadas[NumeroDaPergunta - 1].IndexCorreto);
-                Console.WriteLine(PerguntasSelecionadas[NumeroDaPergunta - 1].Resposta);
-                Console.WriteLine(label.Content.ToString());
                 // Pede uma confirmação do usuário se ele quer escolher essa resposta
                 if ((System.Windows.MessageBox.Show("Você tem certeza de sua resposta?", "Silvio Santos", MessageBoxButton.YesNo)) == MessageBoxResult.Yes)
                 {
@@ -651,6 +718,11 @@ namespace ShowDoMilhao
             Perguntas[82] = new Pergunta("Com quantos anos de casado se comemora a tradicional \"Bodas de Ouro\"?", new string[] { "25 anos", "50 anos", "75 anos", "100 anos" }, 1);
             Perguntas[83] = new Pergunta("Quantos elementos químicos a tabela periódica possui?", new string[] { "108", "109", "113", "118" }, 3);
             Perguntas[84] = new Pergunta("Quais os países que têm a maior e a menor expectativa de vida do mundo?", new string[] { "Austrália e Afeganistão", "Estados Unidos e Angola", "Japão e Serra Leoa", "Itália e Chade" }, 2);
+            Perguntas[85] = new Pergunta("Para qual direção o ônibus abaixo está indo?", new string[] { "Esquerda", "Direita", "Inclinada", "Reta" }, 0, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio5.png"));
+            Perguntas[86] = new Pergunta("Qual o valor da área do círculo abaixo?", new string[] { "28,26 cm²", "56,52 cm²", "254,34 cm²", "1017,36 cm²" }, 2, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio4.png"));
+            Perguntas[87] = new Pergunta("O que as palavras abaixo tem em comum?", new string[] { "Ambas são substantivos", "Ambas são verbos", "Ambas estão no gênero masculino", "Nada" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio2.png"));
+            Perguntas[88] = new Pergunta("Qual o perimetro do retângulo abaixo?", new string[] { "24", "28", "40", "80" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio3.png"));
+            Perguntas[89] = new Pergunta("Qual o valor do ângulo X do triângulo abaixo?", new string[] { "90°", "60°", "45°", "30°" }, 3, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio1.png"));
         }
         /// <summary>
         /// Seleciona 10 perguntas aleatórias a serem usadas na rodada
@@ -659,6 +731,7 @@ namespace ShowDoMilhao
         {
             int PerguntasPreparadas = 0;
             bool ConfirmarPergunta = false;
+
             for(var I = 0; PerguntasPreparadas < 10; I++)
             {
                 var Index = R.Next(Perguntas.Length);
@@ -693,7 +766,7 @@ namespace ShowDoMilhao
         {
             if(IndicadorPergunta.Visibility == Visibility.Hidden)
             {
-                IndicadorPergunta.FontSize = 36.0;
+                IndicadorPergunta.FontSize = 48.0;
                 IndicadorPergunta.Content = "Você ganhou R$" + Guest.Pontuacao + "!";
                 IndicadorPergunta.Visibility = Visibility.Visible;
                 Placar.SalvarPontuacao();

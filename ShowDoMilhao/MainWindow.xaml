@@ -5,27 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShowDoMilhao"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Background="#2222CC"
-        Title="Show Do Milhão" Height="350" Width="525" KeyDown="keyPressed" Icon="Resources/showdomilhao_mini.png">
+        Title="Show Do Milhão" Height="450" Width="625" KeyDown="keyPressed" Icon="Resources/showdomilhao_mini.png">
     <Grid>
-        <Label x:Name="Introducao" Content="Pedro9558 presents:" HorizontalAlignment="Left" Margin="89,107,0,0" VerticalAlignment="Top" Height="88" Width="357" RenderTransformOrigin="0.602,0.204" Foreground="Yellow" FontSize="36" Opacity="0"/>
-        <Image x:Name="SDMLogo" HorizontalAlignment="Left" Height="316" Margin="0,-6,0,0" VerticalAlignment="Top" Width="500" Source="/ShowDoMilhao;component/Resources/showdomilhao.png" Opacity="0"/>
-        <Label x:Name="Titulo" Content="Aperte qualquer tecla" HorizontalAlignment="Left" Margin="106,244,0,0" Foreground="Yellow" Visibility="Hidden" VerticalAlignment="Top" FontSize="30"/>
-        <TextBox x:Name="InputNome" HorizontalAlignment="Left" Height="42" Margin="106,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272" FontSize="26" Visibility="Hidden"/>
-        <Button x:Name="OKButton" Content="Pronto!" HorizontalAlignment="Left" Margin="188,278,0,0" VerticalAlignment="Top" Width="102" Height="32" FontSize="16" FontFamily="Microsoft Sans Serif" Visibility="Hidden" Click="CheckName"/>
-        <Image x:Name="MiniLogo" HorizontalAlignment="Left" Height="43" Margin="197,10,0,0" VerticalAlignment="Top" Width="100" Source="/ShowDoMilhao;component/Resources/showdomilhao_mini.png" Visibility="Hidden"/>
-        <Button x:Name="BIniciar" Content="Iniciar" HorizontalAlignment="Left" Margin="197,95,0,0" VerticalAlignment="Top" Width="109" Height="54" BorderThickness="0" FontSize="22" FontWeight="Bold" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
-        <Button x:Name="BPlacar" Content="Placar" HorizontalAlignment="Left" Margin="197,161,0,0" VerticalAlignment="Top" Width="109" Height="54" BorderThickness="0" FontSize="22" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
-        <Button x:Name="BSair" Content="Sair" HorizontalAlignment="Left" Margin="197,228,0,0" VerticalAlignment="Top" Width="109" Height="54" BorderThickness="0" FontSize="22" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
-        <Label x:Name="Copyright" Content="Criado por Pedro9558" HorizontalAlignment="Left" Margin="0,288,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontWeight="Bold" FontSize="9" Opacity="0.2"/>
+        <Label x:Name="Introducao" Content="Pedro9558 presents:" HorizontalAlignment="Left" Margin="83,184,0,0" VerticalAlignment="Top" Height="104" Width="451" RenderTransformOrigin="0.602,0.204" Foreground="Yellow" FontSize="48" Opacity="0"/>
+        <Image x:Name="SDMLogo" HorizontalAlignment="Left" Height="391" Margin="0,-6,0,0" VerticalAlignment="Top" Width="609" Source="/ShowDoMilhao;component/Resources/showdomilhao.png" Opacity="0"/>
+        <Label x:Name="Titulo" Content="Aperte qualquer tecla" HorizontalAlignment="Left" Margin="106,337,0,0" Foreground="Yellow" Visibility="Hidden" VerticalAlignment="Top" FontSize="40"/>
+        <TextBox x:Name="InputNome" HorizontalAlignment="Left" Height="47" Margin="106,263,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="401" FontSize="26" Visibility="Hidden" AutomationProperties.IsRowHeader="True"/>
+        <Button x:Name="OKButton" Content="Pronto!" HorizontalAlignment="Left" Margin="217,317,0,0" VerticalAlignment="Top" Width="166" Height="50" FontSize="24" FontFamily="Microsoft Sans Serif" Visibility="Hidden" Click="CheckName"/>
+        <Image x:Name="MiniLogo" HorizontalAlignment="Left" Height="68" Margin="225,10,0,0" VerticalAlignment="Top" Width="139" Source="/ShowDoMilhao;component/Resources/showdomilhao_mini.png" Visibility="Hidden"/>
+        <Button x:Name="BIniciar" Content="Iniciar" HorizontalAlignment="Left" Margin="212,128,0,0" VerticalAlignment="Top" Width="167" Height="60" BorderThickness="0" FontSize="28" FontWeight="Bold" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
+        <Button x:Name="BPlacar" Content="Placar" HorizontalAlignment="Left" Margin="212,208,0,0" VerticalAlignment="Top" Width="167" Height="60" BorderThickness="0" FontSize="28" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
+        <Button x:Name="BSair" Content="Sair" HorizontalAlignment="Left" Margin="212,288,0,0" VerticalAlignment="Top" Width="167" Height="60" BorderThickness="0" FontSize="28" Foreground="#FFFFE807" Visibility="Hidden" Background="#FF032080" Click="MenuButtonClick"/>
+        <Label x:Name="Copyright" Content="Criado por Pedro9558. Vídeo, Audios e Imagens by SBT Copyright © 2018 - Sistema Brasileiro de Televisão " HorizontalAlignment="Left" Margin="0,390,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontWeight="Bold" FontSize="9" Opacity="0.2"/>
         <Label x:Name="Pergunta" Visibility="Hidden" FontSize="16px" Foreground="#FFF0FB0C" Background="#992222" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68"  Width="700"></Label>
         <Label x:Name="Pontos" Visibility="Hidden" FontSize="16px" Foreground="#FFF0FB0C" Content="Placar: 0" Margin="410, 45,0,0" RenderTransformOrigin="2.362,2.935"/>
         <Label x:Name="AlternativaA" Visibility="Hidden" Cursor="Hand" Content="Label" HorizontalAlignment="Left" Margin="23,95,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontSize="24" MouseDown="CheckAnswer" MouseEnter="ItemSelected" MouseLeave="ItemDeSelected"/>
         <Label x:Name="AlternativaB" Visibility="Hidden" Cursor="Hand" Content="Label2" HorizontalAlignment="Left" Margin="23,142,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontSize="24" MouseDown="CheckAnswer" MouseEnter="ItemSelected" MouseLeave="ItemDeSelected"/>
         <Label x:Name="AlternativaC" Visibility="Hidden" Cursor="Hand" Content="Label3" HorizontalAlignment="Left" Margin="23,189,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontSize="24" MouseDown="CheckAnswer" MouseEnter="ItemSelected" MouseLeave="ItemDeSelected"/>
         <Label x:Name="AlternativaD" Visibility="Hidden" Cursor="Hand" Content="Label4" HorizontalAlignment="Left" Margin="23,236,0,0" VerticalAlignment="Top" Foreground="#FFF0FB0C" FontSize="24" MouseDown="CheckAnswer" MouseEnter="ItemSelected" MouseLeave="ItemDeSelected"/>
-        <Label x:Name="IndicadorPergunta" Visibility="Hidden" Content="Pergunta X" Foreground="#FFF0FB0C" FontSize="48px" HorizontalAlignment="Left" Margin="121,83,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="SilvioImage" HorizontalAlignment="Left" Visibility="Hidden" Height="232" Margin="0,107,0,-19" VerticalAlignment="Top" Width="212" Source="Resources/silvio_source.png" Panel.ZIndex="-1"/>
-
+        <Label x:Name="IndicadorPergunta" Visibility="Hidden" Content="Pergunta X" Foreground="#FFF0FB0C" FontSize="62" HorizontalAlignment="Left" Margin="128,171,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="SilvioImage" HorizontalAlignment="Left" Visibility="Hidden" Height="260" Margin="0,184,0,-22" VerticalAlignment="Top" Width="242" Source="Resources/silvio_source.png" Panel.ZIndex="-1"/>
+        <MediaElement x:Name="introVideo" Visibility="Hidden" HorizontalAlignment="Left" Height="420" Margin="10,10,0,0" VerticalAlignment="Top" Width="605" Volume="3" Source="Resources/sdm_introsdm.wmv" LoadedBehavior="Manual"/>
+        <Image x:Name="ImagemPergunta" Visibility="Hidden" HorizontalAlignment="Left" Height="150" Margin="360,194,0,0" VerticalAlignment="Top" Width="205" Source="Resources/sdm_exercicio2.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Window>
