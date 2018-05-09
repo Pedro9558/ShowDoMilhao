@@ -15,6 +15,17 @@ namespace TestsProject
             Assert.AreEqual("Guest", score.Jogador.Nome);
         }
         [TestMethod]
+        public void TestaSeArquivoDeSaveEhValido()
+        {
+            ScoreManager score = new ScoreManager(new Player("Guest"), "test");
+            string PrimeiraLinha = "";
+            using (StreamReader r = new StreamReader(File.OpenRead(score.FilePath)))
+            {
+                PrimeiraLinha = r.ReadLine();
+            }
+            Assert.AreEqual("[Placares]", PrimeiraLinha);
+        }
+        [TestMethod]
         public void TestaSeRemoveTodosOsNumeros()
         {
             ScoreManager score = new ScoreManager(new Player("Guest"), "test");
