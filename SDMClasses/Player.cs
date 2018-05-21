@@ -3,7 +3,6 @@
     public class Player
     {
         private string _nome;
-        // Versão atualizada da pontuação
         private double _pontuacao;
         public string Nome
         {
@@ -20,10 +19,10 @@
             this.Nome = Nome;
             Pontuacao = 0.0;
         }
-        public Player(string Nome, double PontuacaoAnterior)
+        public Player(string Nome, double Pontuacao)
         {
             this.Nome = Nome;
-            Pontuacao = 0.0;
+            this.Pontuacao = Pontuacao;
         }
     }
 }
