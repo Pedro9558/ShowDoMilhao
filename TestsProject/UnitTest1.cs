@@ -45,5 +45,12 @@ namespace TestsProject
             ScoreManager score = new ScoreManager(new Player("Guest"), "test");
             Assert.IsTrue(File.Exists(score.FilePath));
         }
+        [TestMethod]
+        public void TestaSeRemoveLetras()
+        {
+            ScoreManager score = new ScoreManager(new Player("Guest"), "test");
+            string Corrompido = "2492{iu492u42u$}{";
+            Assert.AreEqual(249249242.0, score.RemoveLetras(Corrompido));
+        }
     }
 }
