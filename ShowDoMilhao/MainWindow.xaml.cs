@@ -16,7 +16,7 @@ namespace ShowDoMilhao
     public partial class MainWindow : Window
     {
         // Vetor de perguntas
-        private Pergunta[] _perguntas = new Pergunta[90];
+        private Pergunta[] _perguntas = new Pergunta[120];
         // Vetor com as perguntas selecionadas
         private Pergunta[] _perguntasSelecionadas = new Pergunta[10];
         private Random R = new Random();
@@ -108,6 +108,7 @@ namespace ShowDoMilhao
             Player = new SoundPlayer(SilvioSantos);
             T.InitializeLifetimeService();
             T.Start();
+            this.Copyright.Content = "Criado por "+Criador+". Vídeo, Audios e Imagens by SBT Copyright © 2018 - Sistema Brasileiro de Televisão";
             TThree.Tick += new EventHandler(AnimacaoPergunta);
             TThree.Interval = 8000;
             TTwo.Interval = 2000;
@@ -152,6 +153,7 @@ namespace ShowDoMilhao
                     // Reproduz vídeo intro
                     introVideo.Visibility = Visibility.Visible;
                     introVideo.Play();
+                    CanPressAnyKey = true;
                     T.Interval = 41600;
                     AuxForAnimation++;
                     break;
@@ -159,6 +161,7 @@ namespace ShowDoMilhao
                     // Termina Reprodução do vídeo
                     introVideo.Visibility = Visibility.Hidden;
                     introVideo.Stop();
+                    CanPressAnyKey = false;
                     AuxForAnimation++;
                     Player.Play();
                     T.Interval = 3000;
@@ -217,8 +220,6 @@ namespace ShowDoMilhao
                     BIniciar.Visibility = Visibility.Visible;
                     BPlacar.Visibility = Visibility.Visible;
                     BSair.Visibility = Visibility.Visible;
-                    // Coleta lixo caso haja algum na memória
-                    GC.Collect();
                     SilvioImage.Visibility = Visibility.Visible;
                     // Cria o perfil do Jogador, caso não exista
                     if(Guest == null)
@@ -239,6 +240,7 @@ namespace ShowDoMilhao
                     {
                         Placar = new ScoreManager(Guest, "SDMPlacar");
                     }
+                    this.AtualizarPlacar();
                     AuxForAnimation++;
                     break;
             }
@@ -253,7 +255,15 @@ namespace ShowDoMilhao
             // Testa se o usuário já pode apertar qualquer tecla
             if(CanPressAnyKey)
             {
-                AuxForAnimation = 7;
+                switch (AuxForAnimation)
+                {
+                    case 3:
+                        T.Interval = 1;
+                        break;
+                    case 6:
+                        AuxForAnimation++;
+                        break;
+                }
             }
         }
         /// <summary>
@@ -275,6 +285,7 @@ namespace ShowDoMilhao
                 Pontos.Visibility = Visibility.Hidden;
                 ImagemPergunta.Visibility = Visibility.Hidden;
                 IndicadorPergunta.Content = "Pergunta " + NumeroDaPergunta;
+                IndicadorPergunta.Margin = new Thickness(189, 161, 0, 0);
                 IndicadorPergunta.Visibility = Visibility.Visible;
                 // Executa um audio personalizado dependendo do número da pergunta
                 switch(NumeroDaPergunta)
@@ -723,6 +734,36 @@ namespace ShowDoMilhao
             Perguntas[87] = new Pergunta("O que as palavras abaixo tem em comum?", new string[] { "Ambas são substantivos", "Ambas são verbos", "Ambas estão no gênero masculino", "Nada" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio2.png"));
             Perguntas[88] = new Pergunta("Qual o perimetro do retângulo abaixo?", new string[] { "24", "28", "40", "80" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio3.png"));
             Perguntas[89] = new Pergunta("Qual o valor do ângulo X do triângulo abaixo?", new string[] { "90°", "60°", "45°", "30°" }, 3, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio1.png"));
+            Perguntas[90] = new Pergunta("O que quer dizer a logo abaixo?", new string[] { "Playtone", "Youtube", "Vine", "Instagram" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio6.png"));
+            Perguntas[91] = new Pergunta("Quem é, atualmente(maio/2018), o técnico do Barcelona?", new string[] { "Ernesto Valverde", "Tito Vilanova", "Gerardo Martino", "José Mourinho" }, 0);
+            Perguntas[92] = new Pergunta("Quando é celebrado o dia do Profissional de TI?", new string[] { "15 de Novembro", "17 de Novembro", "15 de Outubro", "19 de Outubro" }, 3);
+            Perguntas[93] = new Pergunta("Como podemos definir uma sombra?", new string[] { "Ausência de luz", "Ausência de cor", "Ausência de eletricidade", "Ausência de vento" }, 0);
+            Perguntas[94] = new Pergunta("Quem foi que criou o modelo conhecido como \"Pudim de Passas\"?", new string[] { "Bohr", "Tesla", "Rutherford", "Thomson" }, 3);
+            Perguntas[95] = new Pergunta("Você tem um isqueiro, e os itens abaixo. Qual você acende primeiro?", new string[] { "A vela", "O lampião", "O monte de palha", "Nenhuma das alternativas" }, 3, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio7.png"));
+            Perguntas[96] = new Pergunta("Qual desses países não faz fronteira com o Brasil?", new string[] { "Venezuela", "Equador", "Guiana", "Peru" }, 1);
+            Perguntas[97] = new Pergunta("Com quantas linhas é possivel unir os pontos abaixo, sem tirar a caneta do papel?", new string[] { "3", "4", "5", "Desafio Impossivel" }, 1, new Uri("pack://application:,,,/ShowDoMilhao;component/Resources/sdm_exercicio8.png"));
+            Perguntas[98] = new Pergunta("Qual mensagem o ET Bilu mandou para o mundo?", new string[] { "Beba água", "Procure a sabedoria", "Busquem conhecimento", "Encontre a verdade" }, 2);
+            Perguntas[99] = new Pergunta("Qual assunto é muito polêmico, segundo um meme?", new string[] { "Crush", "Mamilos", "Religião", "Terrorismo" }, 2);
+            Perguntas[100] = new Pergunta("Se um trem elétrico viaja em direção ao sul, em que direção vai a fumaça?", new string[] { "Norte", "Sul", "Pra Cima", "Nenhuma das Alternativas" }, 3);
+            Perguntas[101] = new Pergunta("Quantas vezes é possível subtrair 10 de 100?", new string[] { "1 vez", "5 vezes", "10 vezes", "Infinitas Vezes" }, 0);
+            Perguntas[102] = new Pergunta("A mãe de Maria tem 5 filhos: Lalá, Lelé, Lili, Loló e...?", new string[] { "Lila", "Lula", "Lulu", "Nenhuma das anteriores" }, 3);
+            Perguntas[103] = new Pergunta("Qual era o monte mais alto do mundo antes do Everest ser descoberto?", new string[] { "Everest", "Kokoram-2", "Lhotse", "Makalu" }, 0);
+            Perguntas[104] = new Pergunta("Em que ano o FC. Barcelona foi fundado?", new string[] { "1896", "1898", "1899", "1900" }, 2);
+            Perguntas[105] = new Pergunta("Qual o ano do primeiro título Brasileiro do Corinthians?", new string[] { "1990", "1993", "1996", "1998" }, 0);
+            Perguntas[106] = new Pergunta("Quantos anagramas tem a palavra: Ana?", new string[] { "1", "3", "10", "30" }, 1);
+            Perguntas[107] = new Pergunta("Qual dos verbos abaixo está conjugado no gerúndio?", new string[] { "Entregar", "Respondido", "Acertando", "Errou" }, 2);
+            Perguntas[108] = new Pergunta("Em que campeonato de 2016 o Palmeiras se sagrou campeão?", new string[] { "Campeonato Brasileiro", "Campeonato Paulista", "Copa Libertadores", "Nenhum" }, 0);
+            Perguntas[109] = new Pergunta("Como é chamado o número que é representado por 0s e 1s?", new string[] { "Decimal", "Binário", "Hexadecimal", "Hexabinário" }, 1);
+            Perguntas[110] = new Pergunta("\"Ser ponual\" Significa ser:", new string[] { "Atrasado", "Pontual", "Lento", "Certo"}, 1);
+            Perguntas[111] = new Pergunta("Qual o plural de Guarda-Civil?", new string[] { "Guardas-Civil", "Guarda-Civis", "Guardas-Civis", "Guardas-Civeis"}, 2);
+            Perguntas[112] = new Pergunta("Qual o presidente foi responsável pela construção de Brasilia?", new string[] { "Juscelino Kubitschek", "Jânio Quadros", "Getúlio Vargas", "Eurico Gaspar Dutra" }, 0);
+            Perguntas[113] = new Pergunta("Como chamamos o sono do urso durante o inverno?", new string[] { "Preguiça", "Cochilo", "Desmaio", "Hibernação" }, 3);
+            Perguntas[114] = new Pergunta("Qual foi o primeiro nome dado ao \"Show do Milhão\"?", new string[] { "Milionários", "Jogo do Milhão", "Ganhe um Milhão", "Sempre foi Show do Milhão" }, 1);
+            Perguntas[115] = new Pergunta("Quem escreveu o livro \"O Guarani\"", new string[] { "Machado de Assis", "Olavo Billac", "José de Alencar", "Carlos Gomes" }, 2);
+            Perguntas[116] = new Pergunta("Quem foi o amor de Isolda na obra medieval?", new string[] { "Romeu", "Hamlet", "Tristão", "Rigoletto" }, 2);
+            Perguntas[117] = new Pergunta("Complete o dito popular: \"Todos os caminhos levam a...\"", new string[] { "Ruína", "Liberdade", "Nenhum Lugar", "Roma"}, 3);
+            Perguntas[118] = new Pergunta("Em que século a Princesa Isabel assinou a Lei Áurea?", new string[] { "XVI", "XVII", "XVIII", "XIX" }, 3);
+            Perguntas[119] = new Pergunta("Em qual estado brasileiro o pão de queijo é uma comida típica?", new string[] { "Minas Gerais", "Pernambuco", "Goiás", "Rio de Janeiro" }, 0);
         }
         /// <summary>
         /// Seleciona 10 perguntas aleatórias a serem usadas na rodada
@@ -758,6 +799,20 @@ namespace ShowDoMilhao
             }
         }
         /// <summary>
+        /// Prepara o placar
+        /// </summary>
+        private void AtualizarPlacar()
+        {
+            // Evita clonagem de dados
+            this.Scoreboard.Items.Clear();      
+            foreach(Player usuario in Placar.GetPlacarOrdenado())
+            {
+                this.Scoreboard.Items.Add(usuario);
+            }
+            this.Scoreboard.Items.Refresh();
+
+        }
+        /// <summary>
         /// Encerra o jogo, salvando os dados
         /// </summary>
         /// <param name="sender"></param>
@@ -766,9 +821,12 @@ namespace ShowDoMilhao
         {
             if(IndicadorPergunta.Visibility == Visibility.Hidden)
             {
+                // Mostra quanto o jogador ganhou
                 IndicadorPergunta.FontSize = 48.0;
+                IndicadorPergunta.Margin = new Thickness(128, 171, 0, 0);
                 IndicadorPergunta.Content = "Você ganhou R$" + Guest.Pontuacao + "!";
                 IndicadorPergunta.Visibility = Visibility.Visible;
+                // Salva sua pontuação
                 Placar.SalvarPontuacao();
                 // Silvio santos lhe deseja parabens caso você tenha ganhado!
                 if(NumeroDaPergunta == 11)
@@ -777,18 +835,25 @@ namespace ShowDoMilhao
                     Player.Stream = SilvioSantos;
                     Player.Play();
                 }
+                // Remove as perguntas e as alternativas
                 Pergunta.Visibility = Visibility.Hidden;
                 AlternativaA.Visibility = Visibility.Hidden;
                 AlternativaB.Visibility = Visibility.Hidden;
+                ImagemPergunta.Visibility = Visibility.Hidden;
                 AlternativaC.Visibility = Visibility.Hidden;
                 AlternativaD.Visibility = Visibility.Hidden;
                 Pontos.Visibility = Visibility.Hidden;
             }
             else
             {
+                // Mostra o menu
                 AuxForAnimation = 9;
                 IndicadorPergunta.FontSize = 48.0;
+                // Reseta Pontuação
                 Guest.Pontuacao = 0;
+                // Atualiza o placar incluindo a nova pontuação
+                this.AtualizarPlacar();
+                // Atualiza o número da pergunta de volta ao inicio
                 _numeroDaPergunta = 1;
                 IndicadorPergunta.Visibility = Visibility.Hidden;
                 TTwo.Stop();
@@ -812,7 +877,7 @@ namespace ShowDoMilhao
                 }
                 this.PrepararPerguntas();
 
-                System.Windows.MessageBox.Show("Serão feitas 10 perguntas de múltipla escolha, onde cada pergunta certa vale 1000 reais. Preparado, "+ Guest.Nome+"?", "Como funciona?", MessageBoxButton.YesNo);
+                System.Windows.MessageBox.Show("Serão feitas 10 perguntas de múltipla escolha, onde na primeira rodada cada pergunta certa vale mais 1000 reais, na segundada rodada cada pergunta certa vale mais 10000 reais e a última pergunta vale 100000 reais! Preparado, "+ Guest.Nome+"?", "Como funciona?", MessageBoxButton.YesNo);
                 Player.Stop();
                 System.Windows.MessageBox.Show("Ótimo, vamos começar!", "Perfeito!");
                 MiniLogo.Visibility = Visibility.Hidden;
@@ -827,15 +892,27 @@ namespace ShowDoMilhao
             // Botão do placar
             else if (Botao.Name.Equals("BPlacar"))
             {
-                System.Windows.MessageBox.Show(Placar.GetPlacarOrdenado(),"Placar");
+                this.Height = 744.0;
+                this.Width = 627.0;
+                this.Copyright.Margin = new Thickness(0, 684, 0, 0);
+                this.TelaPrincipal.Visibility = Visibility.Hidden;
+                this.TelaPlacar.Visibility = Visibility.Visible;
             }
             // Botão de sair
             else if(Botao.Name.Equals("BSair"))
             {
                 if((System.Windows.MessageBox.Show("Deseja sair do jogo?","Já vai embora?",MessageBoxButton.YesNo,MessageBoxImage.Information)) == MessageBoxResult.Yes)
                 {
-                    Environment.Exit(1);
+                    Environment.Exit(0);
                 }
+            }
+            else if (Botao.Name.Equals("VoltarMenu"))
+            {
+                this.TelaPlacar.Visibility = Visibility.Hidden;
+                this.TelaPrincipal.Visibility = Visibility.Visible;
+                this.Width = 625.0;
+                this.Copyright.Margin = new Thickness(0, 390, 0, 0);
+                this.Height = 450.0;
             }
         }
         // Muda a cor do background caso o item seja selecionado

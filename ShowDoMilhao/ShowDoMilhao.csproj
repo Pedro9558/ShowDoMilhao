@@ -187,6 +187,9 @@
     <Resource Include="Resources\sdm_exercicio3.png" />
     <Resource Include="Resources\sdm_exercicio4.png" />
     <Resource Include="Resources\sdm_exercicio5.png" />
+    <None Include="Resources\sdm_exercicio6.png" />
+    <None Include="Resources\sdm_exercicio7.png" />
+    <None Include="Resources\sdm_exercicio8.png" />
     <Content Include="Resources\sdm_introsdm.wmv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
