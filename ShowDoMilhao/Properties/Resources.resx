@@ -157,6 +157,15 @@
   <data name="sdm_exercicio5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sdm_exercicio5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="sdm_exercicio6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sdm_exercicio6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sdm_exercicio7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sdm_exercicio7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sdm_exercicio8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sdm_exercicio8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sdm_intro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sdm_intro.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
